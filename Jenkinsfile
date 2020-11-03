@@ -1,7 +1,7 @@
 node {
     def app
     stage('Clone Repository') {
-        git branch: "master", url: "https://github.com/Neikl/docker-react.git"
+        git branch: "master", url: "https://github.com/Neikl/Fargate-Terraform.git"
     }
 
     stage('Start Docker Services') {
