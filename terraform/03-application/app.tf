@@ -117,7 +117,7 @@ resource "aws_appautoscaling_policy" "app_scaling" {
       predefined_metric_type = "ECSServiceAverageCPUUtilization"
     }
 
-    target_value = 50
+    target_value = 10
   }
 
   depends_on = [aws_appautoscaling_target.nginx_fargate_target]
