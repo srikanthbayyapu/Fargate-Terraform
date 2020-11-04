@@ -28,12 +28,12 @@ node {
 
     stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
-        sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -var "nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}" -auto-approve"
+        sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
 
     stage('Creating Platform') {
         sh "cd ./terraform/02-platform && terraform init"
-        sh "cd ./terraform/02-platform && terraform apply -var-file='production.tfvars' -var "nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}" -auto-approve"
+        sh "cd ./terraform/02-platform && terraform apply -var-file='production.tfvars' -auto-approve"
     }
 
     stage('Creating ECS Service') {
