@@ -32,17 +32,17 @@ node {
         sh "cd ./terraform/02-platform && terraform apply -var-file='production.tfvars' -auto-approve"
     }
 
-    /*stage('Creating ECS Service') {
+    stage('Creating ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -auto-approve"
-    }*/
+    }
 
-    stage('Destroying ECS Service') {
+    /*stage('Destroying ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform destroy -var-file='production.tfvars' -auto-approve"
     }
 
-    /*stage('Destroying Platform') {
+    stage('Destroying Platform') {
         sh "cd ./terraform/02-platform && terraform init"
         sh "cd ./terraform/02-platform && terraform destroy -var-file='production.tfvars' -auto-approve"
     }
