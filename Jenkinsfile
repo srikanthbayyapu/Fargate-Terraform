@@ -8,7 +8,7 @@ node {
         git branch: "master", url: "https://github.com/Neikl/Fargate-Terraform.git"
     }
 
-   /* stage('Start Docker Services') {
+    stage('Start Docker Services') {
         sh "sudo service docker start"
     }
 
@@ -24,9 +24,9 @@ node {
         docker.withRegistry('https://922079431449.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
             sh "docker push 922079431449.dkr.ecr.us-east-1.amazonaws.com/react:latest"
         }
-    }*/
+    }
 
-    /*stage('Creating Infrastructure') {
+    stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
@@ -39,9 +39,9 @@ node {
     stage('Creating ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
-    }*/
+    }
 
-    stage('Destroying ECS Service') {
+    /*stage('Destroying ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform destroy -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
     }
@@ -54,5 +54,5 @@ node {
     stage('Destroying Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform destroy -var-file='production.tfvars' -auto-approve"
-    }
+    }*/
 }
