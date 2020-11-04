@@ -39,11 +39,7 @@ resource "aws_ecs_task_definition" "nginx_app" {
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   execution_role_arn       = data.terraform_remote_state.platform.outputs.ecs_cluster_role_arn
-  task_role_arn            = data.terraform_remote_state.platform.outputs.ecs_cluster_role_arn
-  volume {
-    name = "src"
-    host_path = "/app"
-  }  
+  task_role_arn            = data.terraform_remote_state.platform.outputs.ecs_cluster_role_arn 
 }
 
 resource "aws_security_group" "app_security_group" {
