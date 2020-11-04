@@ -10,7 +10,7 @@
     }],
     "mountPoints": [
       {
-        "sourceVolume" : ".",
+        "sourceVolume" : "src",
         "containerPath" : "/app"
       }
     ]
