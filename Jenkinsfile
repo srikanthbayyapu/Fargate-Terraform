@@ -22,7 +22,7 @@ node {
         }
     }*/
 
-    /*stage('Creating Infrastructure') {
+    stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
@@ -35,7 +35,7 @@ node {
     stage('Creating ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -auto-approve"
-    }*/
+    }
 
     /*stage('Destroying ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
@@ -45,10 +45,10 @@ node {
     stage('Destroying Platform') {
         sh "cd ./terraform/02-platform && terraform init"
         sh "cd ./terraform/02-platform && terraform destroy -var-file='production.tfvars' -auto-approve"
-    }*/
+    }
 
     stage('Destroying Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform destroy -var-file='production.tfvars' -auto-approve"
-    }
+    }*/
 }
