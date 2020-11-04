@@ -99,7 +99,7 @@ resource "aws_cloudwatch_log_group" "nginxapp_log_group" {
 }
 
 resource "aws_appautoscaling_target" "nginx_fargate_target" {
-  max_capacity       = 5
+  max_capacity       = 3
   min_capacity       = 1
   resource_id        = "service/${data.terraform_remote_state.platform.outputs.ecs_cluster_name}/${aws_ecs_service.ecs_service.name}"
   scalable_dimension = "ecs:service:DesiredCount"
