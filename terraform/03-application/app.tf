@@ -79,6 +79,7 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count   = var.desired_task_number
   cluster         = data.terraform_remote_state.platform.outputs.ecs_cluster_name
   launch_type     = "FARGATE"
+  force_new_deployment = true
 
   network_configuration {
     subnets          = data.terraform_remote_state.platform.outputs.ecs_public_subnets
