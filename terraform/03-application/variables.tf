@@ -14,8 +14,6 @@ variable "nginx_app_name" {
   default     = "nginx"
 }
 variable "nginx_app_image" {
-  description = "Docker image to run in the ECS cluster"
-  default     = "922079431449.dkr.ecr.us-east-1.amazonaws.com/react:latest"
 }
 variable "nginx_app_port" {
   description = "Port exposed by the Docker image to redirect traffic to"
