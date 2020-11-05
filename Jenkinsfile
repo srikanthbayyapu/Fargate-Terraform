@@ -26,7 +26,7 @@ node {
         }
     }*/
 
-    /*stage('Creating Infrastructure') {
+    stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
@@ -39,9 +39,9 @@ node {
     stage('Creating ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
-    }*/
+    }
 
-    stage('Destroying ECS Service') {
+    /*stage('Destroying ECS Service') {
         sh "cd ./terraform/03-application && terraform init"
         sh "cd ./terraform/03-application && terraform destroy -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
     }
@@ -54,5 +54,5 @@ node {
     stage('Destroying Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform destroy -var-file='production.tfvars' -auto-approve"
-    }
+    }*/
 }
