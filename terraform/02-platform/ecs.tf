@@ -61,7 +61,7 @@ resource "aws_alb_target_group" "ecs_default_target_group" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = data.terraform_remote_state.infrastructure.outputs.vpc_id
-  #target_type = "ip"
+  target_type = "ip"
 
   tags = {
     Name = "${var.ecs_cluster_name}-TG"
