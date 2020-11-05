@@ -123,21 +123,3 @@ resource "aws_appautoscaling_policy" "app_scaling" {
 
   depends_on = [aws_appautoscaling_target.nginx_fargate_target]
 }
-
-resource "aws_appautoscaling_policy" "app_scaling_memory" {
-  name = "app_scaling_memory"
-  policy_type = "TargetTrackingScaling"
-  resource_id = aws_appautoscaling_target.nginx_fargate_target.resource_id
-  scalable_dimension = aws_appautoscaling_target.nginx_fargate_target.scalable_dimension
-  service_namespace = aws_appautoscaling_target.nginx_fargate_target.service_namespace
-
-  target_tracking_scaling_policy_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ECSServiceAverageMemoryUtilization"
-    }
-
-    target_value = 50
-  }
-
-  depends_on = [aws_appautoscaling_target.nginx_fargate_target]
-}
