@@ -106,20 +106,41 @@ resource "aws_appautoscaling_target" "nginx_fargate_target" {
   service_namespace  = "ecs"
 }
 
-resource "aws_appautoscaling_policy" "app_scaling" {
-  name = "app_scaling"
-  policy_type = "TargetTrackingScaling"
-  resource_id = aws_appautoscaling_target.nginx_fargate_target.resource_id
-  scalable_dimension = aws_appautoscaling_target.nginx_fargate_target.scalable_dimension
-  service_namespace = aws_appautoscaling_target.nginx_fargate_target.service_namespace
+resource "aws_appautoscaling_policy" "up" {
+  name               = "cb_scale_up"
+  service_namespace  = "ecs"
+  resource_id        = "aws_appautoscaling_target.nginx_fargate_target.resource_id"
+  scalable_dimension = "ecs:service:DesiredCount"
 
-  target_tracking_scaling_policy_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ECSServiceAverageCPUUtilization"
+  step_scaling_policy_configuration {
+    adjustment_type         = "ChangeInCapacity"
+    cooldown                = 60
+    metric_aggregation_type = "Maximum"
+
+    step_adjustment {
+      metric_interval_lower_bound = 0
+      scaling_adjustment          = 1
     }
-
-    target_value = 50
   }
 
-  depends_on = [aws_appautoscaling_target.nginx_fargate_target]
+  depends_on = [aws_appautoscaling_target.target]
+}
+
+# CloudWatch alarm that triggers the autoscaling up policy
+resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
+  alarm_name          = "cb_cpu_utilization_high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = "60"
+  statistic           = "Average"
+  threshold           = "5"
+
+  dimensions = {
+    ClusterName = data.terraform_remote_state.platform.outputs.ecs_cluster_name
+    ServiceName = aws_ecs_service.ecs_service.name
+  }
+
+  alarm_actions = [aws_appautoscaling_policy.up.arn]
 }
