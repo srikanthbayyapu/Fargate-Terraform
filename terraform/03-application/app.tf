@@ -123,7 +123,7 @@ resource "aws_appautoscaling_policy" "up" {
     }
   }
 
-  depends_on = [aws_appautoscaling_target.target]
+  depends_on = [aws_appautoscaling_target.nginx_fargate_target]
 }
 
 # CloudWatch alarm that triggers the autoscaling up policy
