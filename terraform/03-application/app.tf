@@ -108,9 +108,9 @@ resource "aws_appautoscaling_target" "nginx_fargate_target" {
 
 resource "aws_appautoscaling_policy" "up" {
   name               = "cb_scale_up"
-  service_namespace  = "ecs"
-  resource_id        = "aws_appautoscaling_target.nginx_fargate_target.resource_id"
-  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace  = aws_appautoscaling_target.nginx_fargate_target.service_namespace
+  resource_id        = aws_appautoscaling_target.nginx_fargate_target.resource_id
+  scalable_dimension = aws_appautoscaling_target.nginx_fargate_target.scalable_dimension
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
