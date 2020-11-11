@@ -5,7 +5,7 @@ def ECR_REPO_URL = "922079431449.dkr.ecr.us-east-1.amazonaws.com/${SERVICE_NAME}
 node {
     def app
     stage('Clone Repository') {
-        git branch: "test", url: "https://github.com/Neikl/Fargate-Terraform.git"
+        git branch: "test", url: "https://github.com/srikanthbayyapu/Fargate-Terraform.git"
     }
 
     stage('Start Docker Services') {
