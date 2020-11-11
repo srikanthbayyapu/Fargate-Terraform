@@ -1,6 +1,6 @@
 def SERVICE_NAME="react"
 def SERVICE_TAG = "latest"
-def ECR_REPO_URL = "922079431449.dkr.ecr.us-east-1.amazonaws.com/${SERVICE_NAME}"
+def ECR_REPO_URL = "540322794711.dkr.ecr.us-east-1.amazonaws.com/${SERVICE_NAME}"
 
 node {
     def app
@@ -17,12 +17,12 @@ node {
     } 
 
     stage('Docker Build') {
-        sh "docker build -t 922079431449.dkr.ecr.us-east-1.amazonaws.com/react:latest ."
+        sh "docker build -t 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest ."
     }
 
     stage('Push Image to ECR') {
-        docker.withRegistry('https://922079431449.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
-            sh "docker push 922079431449.dkr.ecr.us-east-1.amazonaws.com/react:latest"
+        docker.withRegistry('https://540322794711.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
+            sh "docker push 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest"
         }
     }
 
