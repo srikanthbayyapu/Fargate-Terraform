@@ -21,7 +21,7 @@ node {
     }
 
     stage('Push Image to ECR') {
-        docker.withRegistry('https://540322794711.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1a:react-ecr-role') {
+        docker.withRegistry('https://540322794711.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
             sh "docker push 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest"
         }
     }
