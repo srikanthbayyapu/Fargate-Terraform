@@ -25,7 +25,7 @@ node {
             sh "docker push 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest"
         }
     }
-
+}
   /*  stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
