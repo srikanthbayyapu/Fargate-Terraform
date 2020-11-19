@@ -26,7 +26,7 @@ node {
         }
     }
 
-    stage('Creating Infrastructure') {
+  /*  stage('Creating Infrastructure') {
         sh "cd ./terraform/01-infrastructure && terraform init"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
@@ -41,3 +41,4 @@ node {
         sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
     }
 }
+*/
