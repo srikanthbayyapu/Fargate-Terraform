@@ -16,18 +16,18 @@ node {
         sh "docker image prune -a --force"
     } 
 
-    stage('Docker Build') {
-        sh "docker build -t 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest ."
-    }
+    //stage('Docker Build') {
+    //    sh "docker build -t 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest ."
+    //}
 
-    stage('Push Image to ECR') {
-        docker.withRegistry('https://540322794711.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
-            sh "docker push 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest"
-        }
-    }
+   // stage('Push Image to ECR') {
+   //     docker.withRegistry('https://540322794711.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:react-ecr-role') {
+   //         sh "docker push 540322794711.dkr.ecr.us-east-1.amazonaws.com/react:latest"
+   //     }
+   // }
 
     stage('Creating Infrastructure') {
-        sh "cd ./terraform/01-infrastructure && terraform init"
+        sh "cd ./terraform/01-infrastructure && terraform init -lock=false"
         sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
     }     
 
