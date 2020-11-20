@@ -27,18 +27,18 @@ node {
    // }
 
     stage('Creating Infrastructure') {
-        sh "cd ./terraform/01-infrastructure && terraform init -lock=false"
-        sh "cd ./terraform/01-infrastructure && terraform apply -var-file='production.tfvars' -auto-approve"
+        sh "cd ./terraform/01-infrastructure && sudo terraform init -lock=false"
+        sh "cd ./terraform/01-infrastructure && sudo terraform apply -var-file='production.tfvars' -auto-approve"
     }     
 
     stage('Creating Platform') {
-        sh "cd ./terraform/02-platform && terraform init"
-        sh "cd ./terraform/02-platform && terraform apply -var-file='production.tfvars' -auto-approve"
+        sh "cd ./terraform/02-platform && sudo terraform init"
+        sh "cd ./terraform/02-platform && sudo terraform apply -var-file='production.tfvars' -auto-approve"
     }
 
     stage('Creating ECS Service') {
-        sh "cd ./terraform/03-application && terraform init"
-        sh "cd ./terraform/03-application && terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
+        sh "cd ./terraform/03-application && sudo terraform init"
+        sh "cd ./terraform/03-application && sudo terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
     }
 }
 
