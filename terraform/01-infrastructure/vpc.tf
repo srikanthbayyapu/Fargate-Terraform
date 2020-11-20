@@ -6,7 +6,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "ecs.fargate.terraform.remote.state1"
+    bucket = "ecs.fargate.terraform.remote.state2"
     key    = "prd/infrastructure.tfstate"
     region = "us-east-1"
   }
