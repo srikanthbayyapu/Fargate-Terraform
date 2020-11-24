@@ -32,12 +32,12 @@ node {
     }     
 
     stage('Creating Platform') {
-        sh "cd ./terraform/02-platform && sudo terraform init"
+        sh "cd ./terraform/02-platform && sudo terraform init -lock=false"
         sh "cd ./terraform/02-platform && sudo terraform apply -var-file='production.tfvars' -auto-approve"
     }
 
     stage('Creating ECS Service') {
-        sh "cd ./terraform/03-application && sudo terraform init"
+        sh "cd ./terraform/03-application && sudo terraform init -lock=false"
         sh "cd ./terraform/03-application && sudo terraform apply -var-file='production.tfvars' -var 'nginx_app_image=${ECR_REPO_URL}:${SERVICE_TAG}' -auto-approve"
     }
 }
